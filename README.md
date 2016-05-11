@@ -4,3 +4,6 @@ Be based on the code from https://github.com/mrdoob/three.js/blob/master/example
 
 # Demo
 ![demo](https://raw.githubusercontent.com/ChaunceyKiwi/SimpleMC/master/demo.png)
+
+# Try
+You can try it online http://www.chauncey.work/demo/misc.html
