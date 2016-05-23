@@ -222,9 +222,9 @@
 
         for ( var i = 0, l = geometry.faces.length; i < l; i ++ ) {
             var face = geometry.faces[ i ];
-            face.vertexColors[ 0 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-            face.vertexColors[ 1 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-            face.vertexColors[ 2 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
+            face.vertexColors[ 0 ] = new THREE.Color().setRGB( 0.933 + (Math.random() * 0.2 - 0.1), 0.188 + (Math.random() * 0.2 - 0.1), 0.000 );
+            face.vertexColors[ 1 ] = new THREE.Color().setRGB( 0.933 + (Math.random() * 0.2 - 0.1), 0.188 + (Math.random() * 0.2 - 0.1), 0.000 );
+            face.vertexColors[ 2 ] = new THREE.Color().setRGB( 0.933 + (Math.random() * 0.2 - 0.1), 0.188 + (Math.random() * 0.2 - 0.1), 0.000 );
         }
 
         material = new THREE.MeshBasicMaterial( { vertexColors: THREE.VertexColors } );
@@ -232,25 +232,52 @@
         scene.add( mesh );
 
         // objects
-        geometry = new THREE.BoxGeometry( 20, 20, 20 );
+        geometry = new THREE.BoxGeometry( 10, 10, 10 );
 
         for ( var i = 0, l = geometry.faces.length; i < l; i ++ ) {
             var face = geometry.faces[ i ];
-            face.vertexColors[ 0 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-            face.vertexColors[ 1 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-            face.vertexColors[ 2 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
+            face.vertexColors[ 0 ] = new THREE.Color( 0xff0000 );
+            face.vertexColors[ 1 ] = new THREE.Color( 0xff0000 );
+            face.vertexColors[ 2 ] = new THREE.Color( 0xff0000 );
         }
 
-        for ( var i = 0; i < 500; i ++ ) {
-            material = new THREE.MeshPhongMaterial( { specular: 0xffffff, shading: THREE.FlatShading, vertexColors: THREE.VertexColors } );
-            var mesh = new THREE.Mesh( geometry, material );
-            mesh.position.x = Math.floor( Math.random() * 20 - 10 ) * 20;
-            mesh.position.y = Math.floor( Math.random() * 20 ) * 20 + 10;
-            mesh.position.z = Math.floor( Math.random() * 20 - 10 ) * 20;
-            scene.add( mesh );
-            material.color.setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-            objects.push( mesh );
-        }
+//        for ( var i = 0; i < 500; i ++ ) {
+//            material = new THREE.MeshPhongMaterial( { specular: 0xffffff, shading: THREE.FlatShading, vertexColors: THREE.VertexColors } );
+//            var mesh = new THREE.Mesh( geometry, material );
+//            mesh.position.x = Math.floor( Math.random() * 20 - 10 ) * 20;
+//            mesh.position.y = Math.floor( Math.random() * 20 ) * 20 + 10;
+//            mesh.position.z = Math.floor( Math.random() * 20 - 10 ) * 20;
+//            scene.add( mesh );
+//            material.color.setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
+//            objects.push( mesh );
+//        }
+
+        var i, j, k;
+        var layer = 50;
+
+
+        for (k = 0; k < layer; k++)
+            for (i = -layer + k; i < layer - k;i++)
+                for (j = -layer + k; j < layer - k;j++){
+
+                    if((i == -layer + k) || (i == layer - k - 1) || (j == -layer+k) || (j == layer - k - 1)) {
+                        material = new THREE.MeshPhongMaterial({
+                            specular: 0xffffff,
+                            shading: THREE.FlatShading,
+                            vertexColors: THREE.VertexColors
+                        });
+                        var mesh = new THREE.Mesh(geometry, material);
+                        mesh.position.x = i * 10;
+                        mesh.position.y = 10 + 10 * k;
+                        mesh.position.z = j * 10;
+                        scene.add(mesh);
+                        material.color.setRGB(Math.random() * 0.2 + 0.85, 0.85, Math.random() * 0.25 + 0.85);
+                        objects.push(mesh);
+                    }
+
+                }
+
+
 
         //
         renderer = new THREE.WebGLRenderer();
